@@ -43,17 +43,9 @@ These attributes mirror real-world telecom/retail data used for churn analysis.
 ---
 
 ## SQL Analysis
-### Core KPIs
-- **Total Customers**: 6418  
-- **Total Churned Customers**: 1732  
-- **New Joiners (Recent Period)**: 411  
-- **Churn Rate**: 27%  
+The backend of this project was built in **MySQL**, where raw churn data was cleaned, transformed and structured for analysis in Power BI and Machine Learning.
 
-## SQL Analysis
-
-The backend of this project was built in **SQL Server**, where raw churn data was cleaned, transformed, and structured for analysis in Power BI and Machine Learning.
-
-### Database Setup
+### Initial Setup
 Performed data cleaning and transformations:
  - Removed nulls and standardized categorical values.
  - Verified column data types for consistency.
@@ -62,7 +54,36 @@ Performed data cleaning and transformations:
 - Created a **production-ready table**: **`customer_new`** to store cleaned data.
 - Built SQL **views** to simplify reporting and ML integration:
   - **`vw_ChurnData`** – for customer churn metrics and KPIs.  
-  - **`vw_JoinData`** – for preparing new data inputs for the prediction model. 
+  - **`vw_JoinData`** – for preparing new data inputs for the prediction model.
+ 
+---
+
+## Machine Learning Integration
+The ML component was built in **Python (Jupyter Notebook)** using **Random Forest**.
+
+### Steps:
+1. **Data Preprocessing**  
+   - Dropped unused fields (e.g., Customer_ID, Churn_Reason).  
+   - Label encoded categorical variables.  
+   - Encoded target variable: *Stayed (0), Churned (1)*.  
+
+2. **Model Training**  
+   - Train/Test Split: 80/20.  
+   - Model: RandomForestClassifier (100 trees).  
+   - Evaluation: Confusion Matrix + Classification Report.  
+
+3. **Feature Importance**  
+   - Visualized key drivers of churn (tenure, contract type, services).  
+
+4. **Predictions on New Data**  
+   - Used `vw_JoinData` for fresh predictions.  
+   - Predicted churners were flagged and exported to CSV.  
+   - Results integrated back into Power BI dashboard.  
+
+### Key Result  
+- **Predicted Churners**: 378  
+- Majority were **month-to-month contract users** with higher monthly charges.  
+
 ---
 
 ## Power BI Dashboard Overview
@@ -93,7 +114,6 @@ This high-level dashboard was built for quick decision-making and includes:
 
  <img width="1126" height="639" alt="image" src="https://github.com/user-attachments/assets/cf5e6d81-c762-4110-be75-1cbc0818805d" />
 
-
 ### Dashboard 2: **Prediction Insights**
 This dashboard highlights **at-risk customers** identified by the machine learning model:
 
@@ -107,34 +127,6 @@ This dashboard highlights **at-risk customers** identified by the machine learni
 - **Navigation Buttons** allow users to move back to the **Summary Dashboard**.
  
 <img width="1125" height="637" alt="image" src="https://github.com/user-attachments/assets/f64ed35a-366f-4b75-9b47-efd7f3ef0590" />
-
----
-
-## Machine Learning Integration
-The ML component was built in **Python (Jupyter Notebook)** using **Random Forest**.
-
-### Steps:
-1. **Data Preprocessing**  
-   - Dropped unused fields (e.g., Customer_ID, Churn_Reason).  
-   - Label encoded categorical variables.  
-   - Encoded target variable: *Stayed (0), Churned (1)*.  
-
-2. **Model Training**  
-   - Train/Test Split: 80/20.  
-   - Model: RandomForestClassifier (100 trees).  
-   - Evaluation: Confusion Matrix + Classification Report.  
-
-3. **Feature Importance**  
-   - Visualized key drivers of churn (tenure, contract type, services).  
-
-4. **Predictions on New Data**  
-   - Used `vw_JoinData` for fresh predictions.  
-   - Predicted churners were flagged and exported to CSV.  
-   - Results integrated back into Power BI dashboard.  
-
-### Key Result  
-- **Predicted Churners**: 378  
-- Majority were **month-to-month contract users** with higher monthly charges.  
 
 ---
 
