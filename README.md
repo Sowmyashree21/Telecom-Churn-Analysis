@@ -164,4 +164,6 @@ This project gave me the opportunity to combine **data engineering, BI reporting
 
 I look forward to building more projects that integrate **data visualization and predictive analytics** to support business decisions.  
 
----
+**GitHub** – [Sowmyashree21](https://github.com/Sowmyashree21)
+
+**LinkedIn** - [Sowmyashree L](https://www.linkedin.com/in/sowmyashree-l-a7b829326/)
